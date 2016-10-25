@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- TextInput -->
+    <style name="TextInputHint" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:textColor">@color/custom_color_accent_FF4081</item>
+    </style>
+
+    <!-- Text -->
+    <style name="CommonSmallText" parent="TextAppearance.AppCompat.Small" />
+
+    <style name="CommonMediumText" parent="TextAppearance.AppCompat.Medium" />
+
+    <style name="CommonLargeText" parent="TextAppearance.AppCompat.Large" />
+
+    <style name="CommonLargeText.White" parent="TextAppearance.AppCompat.Large">
+        <item name="android:textColor">@color/color_general_white_FFFFFF</item>
+    </style>
+</resources>

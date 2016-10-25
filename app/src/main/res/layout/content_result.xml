@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/custom_dimen_margin"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/CommonMediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginBottom="@dimen/custom_dimen_margin"
+            android:text="@string/custom_string_text_selecting_hashtag" />
+
+        <ScrollView
+            android:id="@+id/scroll_selecting_hashtag_parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_view_corner_background">
+
+            <LinearLayout
+                android:id="@+id/layout_selecting_hashtag"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="@dimen/custom_dimen_margin" />
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/custom_dimen_margin"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/CommonMediumText"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/custom_dimen_text_height"
+            android:layout_marginBottom="@dimen/custom_dimen_margin"
+            android:text="@string/custom_string_text_selected_result" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/custom_view_corner_background"
+                android:padding="@dimen/custom_dimen_padding">
+
+                <TextView
+                    android:id="@+id/text_hashtag_result"
+                    style="@style/CommonMediumText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </ScrollView>
+
+            <LinearLayout
+                android:id="@+id/layout_button_parent"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/custom_dimen_general_height"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/custom_dimen_margin"
+                android:layout_marginTop="@dimen/custom_dimen_margin"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button_clear"
+                    style="@style/CommonButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/custom_dimen_margin"
+                    android:layout_weight="1"
+                    android:elevation="@dimen/custom_dimen_elevation"
+                    android:text="清   除"
+                    android:translationZ="@dimen/custom_dimen_translationZ" />
+
+                <Button
+                    android:id="@+id/button_copy"
+                    style="@style/CommonButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:elevation="@dimen/custom_dimen_elevation"
+                    android:text="@string/custom_action_copy"
+                    android:translationZ="@dimen/custom_dimen_translationZ" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

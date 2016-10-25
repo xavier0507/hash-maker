@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="custom_color_primary_1976D2">#1976D2</color>
+    <color name="custom_color_primary_dark_0D47A1">#0D47A1</color>
+    <color name="custom_color_accent_FF4081">#FF4081</color>
+    <color name="custom_color_background_B3E5FC">#B3E5FC</color>
+
+    <color name="custom_color_hashtag_top5">#F44336</color>
+    <color name="custom_color_hashtag_other">#BDBDBD</color>
+</resources>

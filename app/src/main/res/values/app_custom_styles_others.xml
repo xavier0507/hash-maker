@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- CardView -->
+    <style name="CardViewWithBorder_BgB3E5FC" parent="CardView">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textColor">@color/color_general_edit_text_color_263238</item>
+        <item name="android:background">@drawable/custom_card_view_corner_background</item>
+    </style>
+
+    <style name="CardViewWithBorder_BgWhite" parent="CardView">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textColor">@color/color_general_edit_text_color_263238</item>
+        <item name="android:background">@drawable/custom_card_view_white_corner_background</item>
+    </style>
+
+    <!-- EditText -->
+    <style name="CommonEditTextWithBorder" parent="android:Widget.EditText" />
+
+    <style name="EditTextWithBorder_BgB3E5FC" parent="CommonEditTextWithBorder">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:background">@color/custom_color_background_B3E5FC</item>
+    </style>
+
+    <style name="EditTextWithBorder_BgWhite" parent="android:Widget.EditText">
+        <item name="android:textAppearance">@style/CommonSmallText</item>
+        <item name="android:background">@color/color_general_white_FFFFFF</item>
+    </style>
+
+    <!-- Button -->
+    <style name="CommonButton" parent="Widget.AppCompat.Button">
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textColor">@color/color_general_white_FFFFFF</item>
+        <item name="android:background">@drawable/custom_button_corner_background</item>
+    </style>
+</resources>

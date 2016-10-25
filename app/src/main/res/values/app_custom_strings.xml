@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="custom_string_version">目前版本</string>
+
+    <string name="custom_string_edit_text_post">請輸入/貼上文字內容</string>
+    <string name="custom_string_text_selecting_hashtag"># 挑選Hashtag #</string>
+    <string name="custom_string_text_selected_result"># 選擇的結果 #</string>
+
+    <string name="custom_string_toast_empty_message">請輸入文字！</string>
+    <string name="custom_string_toast_short_message">很抱歉！無法找出合適的Hashtag！</string>
+
+    <string name="custom_action_clear">清   除</string>
+    <string name="custom_action_send">送   出</string>
+    <string name="custom_action_copy">複   製</string>
+</resources>
