@@ -28,8 +28,11 @@ public class HashMaker {
     private Logger logger = Logger.getInstance(this.getClass());
 
     private StopWordsReader stopWordsReader = new StopWordsReader();
-
     private Set<String> stopWordSet;
+
+    private static final float d = 0.85f;
+    private static final int MAX_LOOP = 500;
+    private static final float END_CONDITION = 0.0001f;
 
     public HashMaker() {
         this.stopWordSet = this.stopWordsReader.getStopWords();
@@ -65,15 +68,14 @@ public class HashMaker {
     }
 
     private Map<String, Float> calculateTextRank(Map<String, Set<String>> wordSet) {
-        float d = 0.85f;
         Map<String, Float> score = new HashMap<>();
 
-        for (int i = 0; i < 500; i++) {
-            System.out.println("count: " + i);
+        for (int i = 0; i < MAX_LOOP; i++) {
+            logger.d("count: " + i);
 
             Map<String, Float> m = new HashMap<>();
-            float max_diff = 0;
             Map<String, Set<String>> words = wordSet;
+            float max_diff = 0;
 
             for (Map.Entry<String, Set<String>> entry : words.entrySet()) {
                 String key = entry.getKey();
@@ -95,7 +97,9 @@ public class HashMaker {
 
             score = m;
 
-            if (max_diff <= 0.0001f) {
+            logger.d("max_diff: " + max_diff);
+
+            if (max_diff <= END_CONDITION) {
                 break;
             }
         }
