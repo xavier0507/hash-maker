@@ -74,8 +74,8 @@ public class HashtagResultActivity extends BaseActivity implements View.OnClickL
     }
 
     @Override
-    protected void executeOtherTasks() {
-        super.executeOtherTasks();
+    protected void postProcess() {
+        super.postProcess();
         this.addHashtagButtons();
     }
 

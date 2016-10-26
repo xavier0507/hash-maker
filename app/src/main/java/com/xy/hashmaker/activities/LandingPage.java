@@ -47,8 +47,8 @@ public class LandingPage extends BaseActivity {
     }
 
     @Override
-    protected void executeOtherTasks() {
-        super.executeOtherTasks();
+    protected void postProcess() {
+        super.postProcess();
         this.executePostDelayed();
     }
 
@@ -57,10 +57,10 @@ public class LandingPage extends BaseActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(LandingPage.this, MainActivity.class);
+                Intent intent = new Intent(LandingPage.this, MainDrawerStyleActivity.class);
                 startActivity(intent);
                 finish();
             }
-        }, 5000);
+        }, 1500);
     }
 }

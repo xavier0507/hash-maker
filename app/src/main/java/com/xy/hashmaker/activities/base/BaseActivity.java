@@ -21,7 +21,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         this.findUI();
         this.initUI();
         this.registerEvent();
-        this.executeOtherTasks();
+        this.postProcess();
     }
 
     protected void preProcess() {
@@ -33,7 +33,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void initUI() {
     }
 
-    protected void executeOtherTasks() {
+    protected void postProcess() {
     }
 
     abstract protected int getLayoutId();
