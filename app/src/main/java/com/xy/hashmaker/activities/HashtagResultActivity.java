@@ -15,8 +15,6 @@ import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
-import com.facebook.share.model.ShareLinkContent;
-import com.facebook.share.widget.ShareDialog;
 import com.xy.hashmaker.R;
 import com.xy.hashmaker.activities.base.BaseWithToolBarActivity;
 import com.xy.hashmaker.algorithm.Filter;
