@@ -8,4 +8,4 @@
 /captures
 .externalNativeBuild
 xavier_yin.jks
-build_release_config.gradle
+build_keystore_config.gradle

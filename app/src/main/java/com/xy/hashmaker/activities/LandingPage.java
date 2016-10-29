@@ -2,8 +2,6 @@ package com.xy.hashmaker.activities;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 
 import com.xy.hashmaker.R;
@@ -19,7 +17,6 @@ public class LandingPage extends BaseActivity {
     protected void preProcess() {
         super.preProcess();
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
     }
 
     @Override
@@ -33,22 +30,13 @@ public class LandingPage extends BaseActivity {
     }
 
     @Override
-    protected void initUI() {
-        super.initUI();
-
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
-    }
-
-    @Override
     protected void registerEvent() {
         // Do nothing
     }
 
     @Override
-    protected void executeOtherTasks() {
-        super.executeOtherTasks();
+    protected void postProcess() {
+        super.postProcess();
         this.executePostDelayed();
     }
 
@@ -57,10 +45,10 @@ public class LandingPage extends BaseActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(LandingPage.this, MainActivity.class);
+                Intent intent = new Intent(LandingPage.this, MainDrawerStyleActivity.class);
                 startActivity(intent);
                 finish();
             }
-        }, 5000);
+        }, 1500);
     }
 }

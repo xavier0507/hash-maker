@@ -6,4 +6,5 @@ package com.xy.hashmaker.constants;
 
 public class ExtraKey {
     public static final String EXTRA_KEY_CONTENT = "EXTRA_KEY_CONTENT";
+    public static final String EXTRA_KEY_HASHTAG_LIST = "EXTRA_KEY_HASHTAG_LIST";
 }
