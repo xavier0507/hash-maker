@@ -151,8 +151,7 @@ public class HashtagResultActivity extends BaseWithToolBarActivity implements Vi
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-
-        for (int i = 0; i < this.filter.getTop5Hashtags().size(); i++) {
+        for (int i = 0; i < results.size(); i++) {
             TextView hashtagButton = (TextView) layoutInflater.inflate(R.layout.component_hashtag_text, null);
             String hashtag = this.getString(R.string.custom_string_hash) + results.get(i);
 
