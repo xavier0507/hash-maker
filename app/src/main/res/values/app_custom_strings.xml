@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="custom_string_hash">#</string>
+    <string name="custom_string_hello">Hello</string>
+    <string name="custom_string_welcome_to_use_hashmaker">歡迎使用#HashMaker</string>
+
     <string name="custom_string_version">目前版本</string>
-    <string name="custom_string_facebook_dev_app_id">618320935005741</string>
 
     <string name="custom_string_edit_text_post">請輸入/貼上文字內容</string>
     <string name="custom_string_text_selecting_hashtag"># 挑選Hashtag #</string>
@@ -12,8 +15,24 @@
 
     <string name="custom_action_clear">清   除</string>
     <string name="custom_action_send">送   出</string>
+    <string name="custom_action_post">發佈至其他平台</string>
     <string name="custom_action_copy">複   製</string>
+
+    <string name="custom_action_copy_contents">複製原文</string>
+    <string name="custom_action_copy_hashtag">複製Hashtag</string>
+    <string name="custom_action_copy_all">複製並開啟Facebook</string>
+    <string name="custom_action_copy_all_to_other_platform">複製並分享至其他平台</string>
 
     <string name="custom_string_drawer_open">開啟</string>
     <string name="custom_string_drawer_close">關閉</string>
+
+    <string name="custom_string_menu_login_group_fb">Facebook登入</string>
+    <string name="custom_string_menu_logout_group_fb">Facebook登出</string>
+
+    <string name="custom_string_copy_hashtag">已為你複製Hashtag！</string>
+    <string name="custom_string_copy_all_to_facebook">已為你複製原文與Hashtag！</string>
+    <string name="custom_string_hashtag_empty">您尚未選擇所需的Hashtag！</string>
+
+    <string name="custom_string_menu_hashtag">標註Hashtag</string>
+    <string name="custom_string_menu_version">版本</string>
 </resources>

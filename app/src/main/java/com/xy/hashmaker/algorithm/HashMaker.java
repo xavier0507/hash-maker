@@ -2,6 +2,8 @@ package com.xy.hashmaker.algorithm;
 
 import com.hankcs.hanlp.HanLP;
 import com.hankcs.hanlp.seg.common.Term;
+import com.xy.hashmaker.R;
+import com.xy.hashmaker.activities.application.HashMakerApplication;
 import com.xy.hashmaker.utils.Logger;
 
 import java.util.ArrayList;
@@ -47,7 +49,7 @@ public class HashMaker {
 
         for (Map.Entry<String, Float> entry : sortedScoreList) {
             logger.d("key: " + entry.getKey() + ", value: " + scoreSet.get(entry.getKey()));
-            hashTagResults.append("#").append(entry.getKey()).append(": ").append(scoreSet.get(entry.getKey())).append("\n");
+            hashTagResults.append(HashMakerApplication.getAppResources().getString(R.string.custom_string_hash)).append(entry.getKey()).append(": ").append(scoreSet.get(entry.getKey())).append("\n");
 
             hashTagList.add(entry.getKey());
         }

@@ -1,9 +1,11 @@
 package com.xy.hashmaker.activities;
 
 import android.content.ClipboardManager;
-import android.support.v7.widget.Toolbar;
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -11,22 +13,24 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.xy.hashmaker.BuildConfig;
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareDialog;
 import com.xy.hashmaker.R;
-import com.xy.hashmaker.activities.base.BaseActivity;
+import com.xy.hashmaker.activities.base.BaseWithToolBarActivity;
 import com.xy.hashmaker.algorithm.Filter;
 import com.xy.hashmaker.constants.ExtraKey;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Xavier Yin on 10/20/16.
  */
 
-public class HashtagResultActivity extends BaseActivity implements View.OnClickListener {
+public class HashtagResultActivity extends BaseWithToolBarActivity implements View.OnClickListener {
     private Filter filter;
-
-    private Toolbar toolbar;
 
     private ViewGroup selectingHashTagLayout;
     private TextView hashtagResultText;
@@ -34,8 +38,40 @@ public class HashtagResultActivity extends BaseActivity implements View.OnClickL
     private Button clearButton;
     private Button copyButton;
 
+    private String content;
     private ArrayList<String> hashtagResultList;
     private String currentSelectedResult;
+
+//    private String stringYouExtracted;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        this.getMenuInflater().inflate(R.menu.menu_hastag_results, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_copy_hashtag:
+                this.copyText(R.id.action_copy_hashtag);
+                return true;
+
+            case android.R.id.home:
+                this.onBackPressed();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void preProcess() {
+        super.preProcess();
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this.getApplication());
+    }
 
     @Override
     protected int getLayoutId() {
@@ -44,27 +80,27 @@ public class HashtagResultActivity extends BaseActivity implements View.OnClickL
 
     @Override
     protected void receiveIntent() {
-        this.hashtagResultList = this.getIntent().getExtras().getStringArrayList(ExtraKey.EXTRA_KEY_CONTENT);
+        this.content = this.getIntent().getExtras().getString(ExtraKey.EXTRA_KEY_CONTENT);
+        this.hashtagResultList = this.getIntent().getExtras().getStringArrayList(ExtraKey.EXTRA_KEY_HASHTAG_LIST);
         this.filter = new Filter(this.hashtagResultList);
     }
 
     @Override
     protected void findUI() {
-        this.toolbar = (Toolbar) this.findViewById(R.id.toolbar);
+        super.findUI();
 
         this.selectingHashTagLayout = (ViewGroup) this.findViewById(R.id.layout_selecting_hashtag);
         this.hashtagResultText = (TextView) this.findViewById(R.id.text_hashtag_result);
 
         this.clearButton = (Button) this.findViewById(R.id.button_clear);
-        this.copyButton = (Button) this.findViewById(R.id.button_copy);
+        this.copyButton = (Button) this.findViewById(R.id.button_post);
     }
 
     @Override
     protected void initUI() {
-        this.toolbar.setLogo(R.drawable.pic_sharp);
-        this.toolbar.setTitle(this.getTitle() + " " + "v" + BuildConfig.VERSION_NAME);
-        this.toolbar.setTitleTextColor(this.getResources().getColor(R.color.color_general_white_FFFFFF));
-        this.setSupportActionBar(toolbar);
+        super.initUI();
+        this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        this.getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     @Override
@@ -83,50 +119,99 @@ public class HashtagResultActivity extends BaseActivity implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.button_clear:
-                hashtagResultText.setText("");
+                this.clear();
                 break;
 
-            case R.id.button_copy:
-                String stringYouExtracted = hashtagResultText.getText().toString();
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
-                android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", stringYouExtracted);
-                clipboard.setPrimaryClip(clip);
-
-                Toast.makeText(this, "已將hashtag複製！", Toast.LENGTH_LONG).show();
+            case R.id.button_post:
+                this.copyText(R.id.button_post);
                 break;
         }
     }
 
+    // Methods
     private void addHashtagButtons() {
+        this.selectingHashTagLayout.removeAllViews();
+        this.showHashtag(true);
+
+        if (this.filter.getOtherHashtags() != null || this.filter.getOtherHashtags().size() > 0) {
+            this.showHashtag(false);
+        }
+    }
+
+    private void showHashtag(boolean isTop5) {
+        List<String> results;
+        int color;
+
+        if (isTop5) {
+            results = this.filter.getTop5Hashtags();
+            color = R.color.custom_color_hashtag_top5;
+        } else {
+            results = this.filter.getOtherHashtags();
+            color = R.color.custom_color_hashtag_other;
+        }
+
         LayoutInflater layoutInflater = LayoutInflater.from(this);
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        this.selectingHashTagLayout.removeAllViews();
+
 
         for (int i = 0; i < this.filter.getTop5Hashtags().size(); i++) {
             TextView hashtagButton = (TextView) layoutInflater.inflate(R.layout.component_hashtag_text, null);
-            String hashtag = "#" + this.filter.getTop5Hashtags().get(i);
+            String hashtag = this.getString(R.string.custom_string_hash) + results.get(i);
 
-            hashtagButton.setTextColor(this.getResources().getColor(R.color.custom_color_hashtag_top5));
+            hashtagButton.setTextColor(this.getResources().getColor(color));
             hashtagButton.setText(hashtag);
             hashtagButton.setTag(hashtag);
             hashtagButton.setOnClickListener(this.hashtagTextOnClickListener);
 
             this.selectingHashTagLayout.addView(hashtagButton, layoutParams);
         }
+    }
 
-        if (this.filter.getOtherHashtags() != null || this.filter.getOtherHashtags().size() > 0) {
-            for (int i = 0; i < this.filter.getOtherHashtags().size(); i++) {
-                TextView hashtagButton = (TextView) layoutInflater.inflate(R.layout.component_hashtag_text, null);
-                String hashtag = "#" + this.filter.getOtherHashtags().get(i);
+    private void clear() {
+        this.hashtagResultText.setText("");
+    }
 
-                hashtagButton.setTextColor(this.getResources().getColor(R.color.custom_color_hashtag_other));
-                hashtagButton.setText(hashtag);
-                hashtagButton.setTag(hashtag);
-                hashtagButton.setOnClickListener(this.hashtagTextOnClickListener);
+    private void showEmptyToast() {
+        Toast.makeText(this, this.getString(R.string.custom_string_hashtag_empty), Toast.LENGTH_LONG).show();
+    }
 
-                this.selectingHashTagLayout.addView(hashtagButton, layoutParams);
+    private void copyText(int viewId) {
+        if (TextUtils.isEmpty(this.hashtagResultText.getText().toString())) {
+            this.showEmptyToast();
+        } else {
+            String results;
+
+            switch (viewId) {
+                case R.id.action_copy_hashtag:
+                    results = hashtagResultText.getText().toString();
+
+                    this.copyToClipboard(results);
+
+                    Toast.makeText(this, this.getString(R.string.custom_string_copy_hashtag), Toast.LENGTH_LONG).show();
+                    break;
+
+                case R.id.button_post:
+                    StringBuilder stringBuilder = new StringBuilder();
+                    results = stringBuilder.append(content).append("\n\n").append(hashtagResultText.getText().toString()).toString();
+
+                    this.copyToClipboard(results);
+
+                    Toast.makeText(this, this.getString(R.string.custom_string_copy_all_to_facebook), Toast.LENGTH_LONG).show();
+
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_SEND);
+                    intent.putExtra(Intent.EXTRA_TEXT, results);
+                    intent.setType("text/plain");
+                    startActivity(intent);
+                    break;
             }
         }
+    }
+
+    private void copyToClipboard(String results) {
+        ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+        android.content.ClipData clip = android.content.ClipData.newPlainText("Copied Text", results);
+        clipboard.setPrimaryClip(clip);
     }
 
     // Events

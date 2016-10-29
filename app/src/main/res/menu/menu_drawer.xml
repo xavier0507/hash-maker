@@ -1,48 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group
+
+    <!--<group
         android:id="@+id/drawer_group_login"
-        android:checkableBehavior="none">
+        android:checkableBehavior="none"
+        android:visible="false">
 
         <item
             android:id="@+id/drawer_item_login_group_fb"
             android:icon="@drawable/vector_ic_sharp_black_32dp"
             android:title="Facebook登入" />
+    </group>-->
 
-        <item
-            android:id="@+id/drawer_item_login_group_google"
-            android:icon="@drawable/vector_ic_sharp_black_32dp"
-            android:title="Google+登入" />
+    <item android:title="服務">
+        <menu>
+            <group
+                android:id="@+id/drawer_group_service"
+                android:checkableBehavior="single">
 
-        <item
-            android:id="@+id/drawer_item_login_group_ig"
-            android:icon="@drawable/vector_ic_sharp_black_32dp"
-            android:title="Instagram登入" />
-    </group>
+                <item
+                    android:id="@+id/drawer_item_service_group_hashtag"
+                    android:checked="true"
+                    android:icon="@drawable/vector_ic_sharp_black_32dp"
+                    android:title="@string/custom_string_menu_hashtag" />
 
-    <group
-        android:id="@+id/drawer_group_service"
-        android:checkableBehavior="single">
+                <!--<item
+                    android:id="@+id/drawer_item_service_group_keyword"
+                    android:icon="@drawable/vector_ic_sharp_black_32dp"
+                    android:title="分析關鍵字" />-->
+            </group>
+        </menu>
+    </item>
 
-        <item
-            android:id="@+id/drawer_item_service_group_hashtag"
-            android:icon="@drawable/vector_ic_sharp_black_32dp"
-            android:title="標註Hashtag" />
+    <item
+        android:checkable="false"
+        android:title="其他">
+        <menu>
+            <group
+                android:id="@+id/drawer_group_note"
+                android:checkableBehavior="none">
 
-        <item
-            android:id="@+id/drawer_item_service_group_keyword"
-            android:icon="@drawable/vector_ic_sharp_black_32dp"
-            android:title="分析關鍵字" />
-    </group>
-
-    <group
-        android:id="@+id/drawer_group_note"
-        android:checkableBehavior="none">
-
-        <item
-            android:id="@+id/drawer_item_note_group_version"
-            android:checkable="false"
-            android:icon="@drawable/vector_ic_sharp_black_32dp"
-            android:title="版本" />
-    </group>
+                <item
+                    android:id="@+id/drawer_item_note_group_version"
+                    android:checkable="false"
+                    android:icon="@drawable/vector_ic_sharp_black_32dp"
+                    android:title="@string/custom_string_menu_version" />
+            </group>
+        </menu>
+    </item>
 </menu>

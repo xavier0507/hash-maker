@@ -2,8 +2,6 @@ package com.xy.hashmaker.activities;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 
 import com.xy.hashmaker.R;
@@ -19,7 +17,6 @@ public class LandingPage extends BaseActivity {
     protected void preProcess() {
         super.preProcess();
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
     }
 
     @Override
@@ -30,15 +27,6 @@ public class LandingPage extends BaseActivity {
     @Override
     protected void findUI() {
         //Do nothing
-    }
-
-    @Override
-    protected void initUI() {
-        super.initUI();
-
-        View decorView = getWindow().getDecorView();
-        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
     }
 
     @Override
