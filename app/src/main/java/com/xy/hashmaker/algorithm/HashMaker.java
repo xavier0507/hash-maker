@@ -1,5 +1,7 @@
 package com.xy.hashmaker.algorithm;
 
+import android.util.Log;
+
 import com.hankcs.hanlp.HanLP;
 import com.hankcs.hanlp.seg.common.Term;
 import com.xy.hashmaker.R;
@@ -91,10 +93,19 @@ public class HashMaker {
                         continue;
                     }
 
+                    logger.i("key(" + key + "): " + "= key(" + m.get(key) + ") + d(" + d + ") " + "/ " + "size(" + size + ")" + " * " + "score(" + score.get(other) + ")");
+
                     m.put(key, m.get(key) + d / size * (score.get(other) == null ? 0 : score.get(other)));
+
+                    logger.i("result: " +  m.get(key));
                 }
 
+                logger.i("original max_diff: " +  max_diff);
+
                 max_diff = Math.max(max_diff, Math.abs(m.get(key) - (score.get(key) == null ? 0 : score.get(key))));
+
+                logger.i("diff: " +  Math.abs(m.get(key) - (score.get(key) == null ? 0 : score.get(key))));
+                logger.i("max_diff: " +  max_diff);
             }
 
             score = m;
